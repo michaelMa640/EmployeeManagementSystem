@@ -13,6 +13,7 @@ int main()
 		cout << "请选择您要进行的操作： " << endl;
 		cin >> choice;
 		
+		//菜单操作
 		switch (choice)
 		{
 		case 0://退出系统
