@@ -5,7 +5,8 @@ using namespace std;
 
 class Employee :public Worker
 {
-	Employee(int id,string name, string deptId);
+public:
+	Employee(int id,string name, int deptId);
 	void showInfo();
 	string getDeptName();
 };

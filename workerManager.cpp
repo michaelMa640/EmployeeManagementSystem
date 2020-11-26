@@ -1,9 +1,6 @@
 #include"workerManager.h"
 
-WorkerManager::WorkerManager()
-{
-
-}
+WorkerManager::WorkerManager(){}
 
 //œ‘ æ≤Àµ•
 void WorkerManager::Show_Menu()

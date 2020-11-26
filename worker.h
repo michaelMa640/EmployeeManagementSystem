@@ -10,5 +10,5 @@ public:
 
 	int m_Id;
 	string m_Name;
-	string m_DeptId;
+	int m_DeptId;
 };
