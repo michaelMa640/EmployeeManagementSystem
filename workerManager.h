@@ -1,10 +1,13 @@
 #pragma once
 #include<iostream>
+#include<fstream>
 using namespace std;
 #include"worker.h"
 #include"employee.h"
 #include"manager.h"
 #include"boss.h"
+
+#define FILENAME "empFile.txt"
 
 class WorkerManager
 {
@@ -14,6 +17,8 @@ public:
 	void Show_Menu();
 	//增加员工
 	void Add_Emp();
+	//保存文件
+	void save();
 	//退出系统
 	void exitSystem();
 	~WorkerManager();

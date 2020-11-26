@@ -91,6 +91,7 @@ void WorkerManager::Add_Emp()
 		this->m_EmpNum = newSize;
 		//提示信息
 		cout << "成功添加" << addNum << "名员工!" << endl;
+		this->save();
 	}
 	else
 	{
@@ -98,6 +99,20 @@ void WorkerManager::Add_Emp()
 	}
 	system("pause");
 	system("cls");
+}
+
+//保存
+void WorkerManager::save()
+{
+	ofstream ofs;
+	ofs.open(FILENAME, ios::app);
+	for (int i = 0; i < this->m_EmpNum; i++)
+	{
+		ofs << this->EmpArray[i]->m_Id << " "
+			<< this->EmpArray[i]->m_Name << " "
+			<< this->EmpArray[i]->m_DeptId << endl;
+	}
+	ofs.close();
 }
 
 //退出程序
@@ -110,5 +125,9 @@ void WorkerManager::exitSystem()
 
 WorkerManager::~WorkerManager()
 {
-
+	if (this->EmpArray != NULL)
+	{
+		delete[] this->EmpArray;
+		this->EmpArray = NULL;
+	}
 }
