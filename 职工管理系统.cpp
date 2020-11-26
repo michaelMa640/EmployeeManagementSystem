@@ -2,11 +2,6 @@
 using namespace std;
 #include"workerManager.h"
 
-//#include"worker.h"
-//#include"employee.h"
-//#include"manager.h"
-//#include"boss.h"
-
 int main()
 {
 	////测试代码
@@ -39,6 +34,7 @@ int main()
 			wm.exitSystem();
 			break;
 		case 1://添加职工
+			wm.Add_Emp();
 			break;
 		case 2://显示职工
 			break;

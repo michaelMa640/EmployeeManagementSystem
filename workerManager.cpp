@@ -1,6 +1,13 @@
 #include"workerManager.h"
+//#include<string>
 
-WorkerManager::WorkerManager(){}
+WorkerManager::WorkerManager()
+{
+	//员工数组指针初始化
+	this->EmpArray = NULL;
+	//员工人数初始化为0
+	this->m_EmpNum = 0;
+}
 
 //显示菜单
 void WorkerManager::Show_Menu()
@@ -17,6 +24,80 @@ void WorkerManager::Show_Menu()
 	cout << "*************  7.清空所有文档  *************" << endl;
 	cout << "********************************************" << endl;
 	cout << endl;
+}
+
+//增加员工
+void WorkerManager::Add_Emp()
+{
+	cout << "请输入您要添加的员工数量" << endl;
+	int addNum = 0;
+	cin >> addNum;
+	if (addNum > 0)
+	{
+		int newSize = this->m_EmpNum + addNum;
+		Worker** newSpace = new Worker * [newSize];
+
+		//复制原有数据到新空间下
+		if (this->EmpArray != NULL)
+		{
+			for (int i = 0; i < this->m_EmpNum; i++)
+			{
+				newSpace[i] = this->EmpArray[i];
+			}
+		}
+
+		//输入新数据
+		for (int i = 0; i < addNum; i++)
+		{
+			int id;
+			string name;
+			int dSelect;
+
+			cout << "请输入第" << i+1 << "个员工的编号" << endl;
+			cin >> id;
+
+			cout << "请输入第" << i + 1 << "个员工的姓名" << endl;
+			cin >> name;
+
+			cout << "请输入第" << i + 1 << "个员工的岗位" << endl;
+			cout << "1、普通员工" << endl;
+			cout << "2、经理" << endl;
+			cout << "3、老板" << endl;
+			cin >> dSelect;
+
+			//根据输入岗位序号判断并写入
+			Worker* worker = NULL;
+			switch(dSelect)
+			{
+			case 1:
+				worker = new Employee(id, name, 1);
+				break;
+			case 2:
+				worker = new Manager(id, name, 2);
+				break;
+			case 3:
+				worker = new Boss(id, name, 3);
+				break;
+			default:
+				break;
+			}
+			newSpace[this->m_EmpNum + i] = worker;
+		}
+		//释放原有空间
+		delete[] this->EmpArray;
+		//更改新空间的指向
+		this->EmpArray = newSpace;
+		//更新新的员工人数
+		this->m_EmpNum = newSize;
+		//提示信息
+		cout << "成功添加" << addNum << "名员工!" << endl;
+	}
+	else
+	{
+		cout << "输入有误!" << endl;
+	}
+	system("pause");
+	system("cls");
 }
 
 //退出程序
