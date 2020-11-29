@@ -17,12 +17,16 @@ public:
 	void Show_Menu();
 	//增加员工
 	void Add_Emp();
+	//统计文件中人数
+	int get_EmpNum();
 	//保存文件
 	void save();
 	//退出系统
 	void exitSystem();
 	~WorkerManager();
 
+	//判断文件是否为空 标志
+	bool m_FileIsEmpty;
 	//记录文件中员工人数
 	int m_EmpNum;
 	//员工数组指针
