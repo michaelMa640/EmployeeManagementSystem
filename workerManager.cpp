@@ -9,7 +9,7 @@ WorkerManager::WorkerManager()
 	//文件不存在
 	if (!ifs.is_open())
 	{
-		cout << "文件不存在" << endl;
+		//cout << "文件不存在" << endl;
 		//初始化属性
 		//员工数组指针初始化
 		this->EmpArray = NULL;
@@ -26,7 +26,7 @@ WorkerManager::WorkerManager()
 	ifs >> ch;
 	if (ifs.eof())
 	{
-		cout << "文件为空" << endl;
+		//cout << "文件为空" << endl;
 		//初始化属性
 		//员工数组指针初始化
 		this->EmpArray = NULL;
@@ -40,8 +40,21 @@ WorkerManager::WorkerManager()
 
 	//文件存在不为空
 	int num = this->get_EmpNum();
-	cout << "职工人数为: " << num << ednl;
+	cout << "职工人数为: " << num << endl;
 	this->m_EmpNum = num;
+
+	//初始化员工
+	//开辟空间
+	this->EmpArray = new Worker * [this->m_EmpNum];
+	//存储数据
+	this->init_Emp();
+
+	for (int i = 0; i < this->m_EmpNum; i++)
+	{
+		cout << "职工编号：" << this->EmpArray[i]->m_Id
+			<< " 职工姓名：" << this->EmpArray[i]->m_Name
+			<< " 职工岗位：" << this->EmpArray[i]->m_DeptId << endl;
+	}
 }
 
 //显示菜单
@@ -88,7 +101,7 @@ void WorkerManager::Add_Emp()
 			string name;
 			int dSelect;
 
-			cout << "请输入第" << i+1 << "个员工的编号" << endl;
+			cout << "请输入第" << i + 1 << "个员工的编号" << endl;
 			cin >> id;
 
 			cout << "请输入第" << i + 1 << "个员工的姓名" << endl;
@@ -128,7 +141,7 @@ void WorkerManager::Add_Emp()
 		//提示信息
 		cout << "成功添加" << addNum << "名员工!" << endl;
 		this->save();
-		delete newSpace;
+		//delete newSpace;
 	}
 	else
 	{
@@ -154,11 +167,44 @@ int WorkerManager::get_EmpNum()
 	return num;
 }
 
+//初始化员工
+void WorkerManager::init_Emp()
+{
+	ifstream ifs;
+	ifs.open(FILENAME, ios::in);
+
+	int id;
+	string name;
+	int dId;
+	int index=0;
+
+	while (ifs >> id && ifs >> name && ifs >> dId)
+	{
+		Worker* worker = NULL;
+		if (dId = 1)
+		{
+			worker = new Employee(id, name, dId);
+		}
+		else if (dId = 2)
+		{
+			worker = new Manager(id, name, dId);
+		}
+		else
+		{
+			worker = new Boss(id, name, dId);
+		}
+		this->EmpArray[index] = worker;
+		index++;
+	}
+
+	ifs.close();
+}
+
 //保存
 void WorkerManager::save()
 {
 	ofstream ofs;
-	ofs.open(FILENAME, ios::app);
+	ofs.open(FILENAME, ios::out);
 	for (int i = 0; i < this->m_EmpNum; i++)
 	{
 		ofs << this->EmpArray[i]->m_Id << " "

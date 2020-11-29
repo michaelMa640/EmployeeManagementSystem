@@ -21,6 +21,8 @@ public:
 	int get_EmpNum();
 	//保存文件
 	void save();
+	//初始化员工
+	void init_Emp();
 	//退出系统
 	void exitSystem();
 	~WorkerManager();
