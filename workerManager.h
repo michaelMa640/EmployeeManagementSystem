@@ -25,6 +25,8 @@ public:
 	void init_Emp();
 	//退出系统
 	void exitSystem();
+	//显示员工
+	void show_Emp();
 	~WorkerManager();
 
 	//判断文件是否为空 标志

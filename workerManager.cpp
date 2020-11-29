@@ -48,13 +48,14 @@ WorkerManager::WorkerManager()
 	this->EmpArray = new Worker * [this->m_EmpNum];
 	//存储数据
 	this->init_Emp();
-
-	for (int i = 0; i < this->m_EmpNum; i++)
+	
+	//测试代码
+	/*for (int i = 0; i < this->m_EmpNum; i++)
 	{
 		cout << "职工编号：" << this->EmpArray[i]->m_Id
 			<< " 职工姓名：" << this->EmpArray[i]->m_Name
 			<< " 职工岗位：" << this->EmpArray[i]->m_DeptId << endl;
-	}
+	}*/
 }
 
 //显示菜单
@@ -220,6 +221,26 @@ void WorkerManager::exitSystem()
 	cout << "欢迎下次使用！" << endl;
 	system("pause");
 	exit(0);
+}
+
+//显示员工
+void WorkerManager::show_Emp()
+{
+	//判断文件是否为空
+	if (this->m_FileIsEmpty)
+	{
+		cout << "没有信息" << endl;
+	}
+	else
+	{
+		for (int i = 0; i < this->m_EmpNum; i++)
+		{
+			//利用多态调用显示接口
+			this->EmpArray[i]->showInfo();
+		}
+	}
+	system("pause");
+	system("cls");
 }
 
 WorkerManager::~WorkerManager()
